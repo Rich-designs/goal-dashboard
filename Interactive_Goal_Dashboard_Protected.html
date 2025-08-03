@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Goal Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+      display: none;
+    }
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .goal-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .goal {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .goal h3 {
+      margin-top: 0;
+    }
+    .progress-bar {
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 10px;
+    }
+    .progress {
+      height: 100%;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+    .spinmaster { background-color: #4CAF50; }
+    .emerald { background-color: #009688; }
+    .forever { background-color: #3F51B5; }
+    .castle { background-color: #9C27B0; }
+    .motivation {
+      margin-top: 3rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #666;
+    }
+    .xp {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #2c3e50;
+    }
+    input[type="number"], input[type="password"] {
+      padding: 5px;
+      margin: 5px;
+    }
+    button {
+      padding: 8px 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+  <script>
+    function updateProgress(id, targetId, barId) {
+      const saved = parseFloat(document.getElementById(id).value);
+      const target = parseFloat(document.getElementById(targetId).innerText);
+      const percent = Math.min((saved / target) * 100, 100).toFixed(1);
+      document.getElementById(barId).style.width = percent + '%';
+      document.getElementById(barId).innerText = percent + '%';
+    }
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === "Pagan") {
+        document.querySelector('.login-container').style.display = 'none';
+        document.body.style.display = 'block';
+      } else {
+        alert("Incorrect password. Try again.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Enter Password to View Dashboard</h2>
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button onclick="checkPassword()">Enter</button>
+  </div>
+
+  <h1>✨ Financial Goal Dashboard ✨</h1>
+  <h2>Track your goals. Build your future.</h2>
+  <div class="goal-container">
+    <div class="goal">
+      <h3>🎧 Mission Spinmaster</h3>
+      <p><strong>Target:</strong> £<span id="target1">1800</span><br>
+      <strong>Saved:</strong> £<input type="number" id="saved1" value="750" onchange="updateProgress('saved1','target1','bar1')"><br>
+      <strong>Deadline:</strong> July 2026</p>
+      <div class="progress-bar">
+        <div id="bar1" class="progress spinmaster" style="width: 41.7%">41.7%</div>
+      </div>
+    </div>
+    <div class="goal">
+      <h3>💍 Operation Emerald</h3>
+      <p><strong>Target:</strong> £<span id="target2">1200</span><br>
+      <strong>Saved:</strong> £<input type="number" id="saved2" value="0" onchange="updateProgress('saved2','target2','bar2')"><br>
+      <strong>Deadline:</strong> July 2026</p>
+      <div class="progress-bar">
+        <div id="bar2" class="progress emerald" style="width: 0%">0%</div>
+      </div>
+    </div>
+    <div class="goal">
+      <h3>💒 Project Forever</h3>
+      <p><strong>Target:</strong> £<span id="target3">12000</span><br>
+      <strong>Saved:</strong> £<input type="number" id="saved3" value="0" onchange="updateProgress('saved3','target3','bar3')"><br>
+      <strong>Deadline:</strong> July 2026</p>
+      <div class="progress-bar">
+        <div id="bar3" class="progress forever" style="width: 0%">0%</div>
+      </div>
+    </div>
+    <div class="goal">
+      <h3>🏰 Castle Quest</h3>
+      <p><strong>Target:</strong> £<span id="target4">20000</span><br>
+      <strong>Saved:</strong> £<input type="number" id="saved4" value="3000" onchange="updateProgress('saved4','target4','bar4')"><br>
+      <strong>Deadline:</strong> July 2028</p>
+      <div class="progress-bar">
+        <div id="bar4" class="progress castle" style="width: 15%">15%</div>
+      </div>
+    </div>
+  </div>
+  <div class="xp">
+    🎮 XP Progress: Level 1 — Earn XP by updating savings and completing challenges!
+  </div>
+  <div class="motivation">
+    💡 "Small steps every day beat big plans never started."
+  </div>
+</body>
+</html>
